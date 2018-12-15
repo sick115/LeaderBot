@@ -60,7 +60,7 @@ function remove(message){
     }
 }
 
-//get the guild role that the Guild Leader belongs to
+//get the guild role that the Guild Leader belongs to, or the guild role stated in the message
 
 function getGuildRole(message, guildRoles, addInfo){
 
@@ -70,7 +70,7 @@ function getGuildRole(message, guildRoles, addInfo){
 
         var role = message.member.roles.find(val => val == guildRoles[i])
         var statedRole = message.member.roles.find(val => val.name == addInfo[2])
-        console.log(role)
+        
         if(role != null && statedRole == null){
             
             guildRole = role
