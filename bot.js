@@ -3,9 +3,6 @@ const auth = require("./auth.json")
 
 const client = new Discord.Client();
 
-var aiChannel = "523282884350443550"
-var awegwen = "224677686566453248"
-
 
 
 client.on("ready", () => {
