@@ -12,11 +12,13 @@ client.on("ready", () => {
 client.on("message", (message) => {
     
     var guildLeaderRole = message.guild.roles.find(val => val.name === "Guild Leader").id
+    var verifiedRole = message.guild.roles.find(val => val.name === "Verified").id
+    var modRole = message.guild.roles.find(val => val.name === "Guild Leader").id
 
-    if(message.content.startsWith("add") && message.member.roles.has(guildLeaderRole)){
+    if(message.content.startsWith("add") && (message.member.roles.has(guildLeaderRole) || message.member.roles.has(modRole)) && message.member.roles.has(verifiedRole)){
         add(message)
     }
-    if(message.content.startsWith("remove") && message.member.roles.has(guildLeaderRole)){
+    if(message.content.startsWith("remove") && (message.member.roles.has(guildLeaderRole) || message.member.roles.has(modRole)) && message.member.roles.has(verifiedRole)){
         remove(message)
     }
 })
@@ -56,7 +58,7 @@ function remove(message){
         message.channel.send(userN + " has been removed from " + guildRole.name)
     }
     else{
-        message.channel.send("User could not be found. You either misspelled something, or you do not have a guild role.")
+        message.channel.send("User could not be found. You either misspelled something, or you do not have the respective guild role.")
     }
 }
 
@@ -71,13 +73,14 @@ function getGuildRole(message, guildRoles, addInfo){
         var role = message.member.roles.find(val => val == guildRoles[i])
         var statedRole = message.member.roles.find(val => val.name == addInfo[2])
         
-        if(role != null && statedRole == null){
-            
-            guildRole = role
-        }
-        else if(statedRole != null){
-            
+        if(statedRole != null){
+
             guildRole = statedRole
+            
+        }
+        else if(statedRole == null){
+            
+            guildRole = 0
         }
         else{
             
