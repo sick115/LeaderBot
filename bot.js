@@ -22,12 +22,17 @@ client.on("message", (message) => {
 })
 
 function add(message){
+    var addInfo = message.content.split(" ")
+
     var guildRoles = getGuildRoles(message.guild)
 
-    var guildRole = getGuildRole(message, guildRoles)
+    var guildRole = getGuildRole(message, guildRoles, addInfo)
 
-    var userN = message.content.slice(4, message.content.length)
+    
 
+    var userN = addInfo[1]
+    
+    console.log(userN)
     var user = message.guild.members.find(val => val.displayName == userN)
         
     if(user != undefined){
@@ -39,11 +44,15 @@ function add(message){
     }
 }
 function remove(message){
+    var addInfo = message.content.split(" ")
+
     var guildRoles = getGuildRoles(message.guild)
 
-    var guildRole = getGuildRole(message, guildRoles)
+    var guildRole = getGuildRole(message, guildRoles, addInfo)
 
-    var userN = message.content.slice(7, message.content.length)
+    
+
+    var userN = addInfo[1]
 
     var user = message.guild.members.find(val => val.displayName == userN)
         
@@ -58,15 +67,20 @@ function remove(message){
 
 //get the guild role that the Guild Leader belongs to
 
-function getGuildRole(message, guildRoles){
-    var guildRole
+function getGuildRole(message, guildRoles, addInfo){
     
+    var guildRole
+
     for(var i = 0; i <= guildRoles.length; i++){
 
         var role = message.member.roles.find(val => val == guildRoles[i])
+        var statedRole = message.member.roles.find(val => val.name == addInfo[2])
 
-        if(role != undefined){
+        if(role != undefined && addInfo[2] == undefined){
             guildRole = role
+        }
+        else if(addInfo[2] != undefined){
+            guildRole = statedRole
         }
         else{
             message.channel.send("Could not find guild role")
