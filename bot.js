@@ -56,7 +56,7 @@ function remove(message){
     }
 }
 
-//search leader's roles to get the guild role that they represent
+//search leader's roles to get the guild role for the guild that they represent
 
 function getGuildRole(message, guildRoles){
     var guildRole
@@ -71,7 +71,7 @@ function getGuildRole(message, guildRoles){
     return guildRole
 }
 
-//sorts guild roles by color, so they all need to be the same. color = 2123412
+//get all the roles of a color, and returns them in an array. color = 2123412
 
 function getGuildRoles(guild){
     var roleArray = guild.roles.array()
