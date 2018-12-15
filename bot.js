@@ -56,10 +56,11 @@ function remove(message){
     }
 }
 
-//search leader's roles to get the guild role for the guild that they represent
+//get the guild role that the Guild Leader belongs to
 
 function getGuildRole(message, guildRoles){
     var guildRole
+    
     for(var i = 0; i <= guildRoles.length; i++){
 
         var role = message.member.roles.find(val => val == guildRoles[i])
@@ -67,11 +68,15 @@ function getGuildRole(message, guildRoles){
         if(role != undefined){
             guildRole = role
         }
+        else{
+            message.channel.send("Could not find guild role")
+        }
     }
     return guildRole
 }
 
-//get all the roles of a color, and returns them in an array. color = 2123412
+//get all the roles of a color, and returns them in an array. I picked the dark blue-ish color that all the guild roles are. 
+//colorValue = 2123412
 
 function getGuildRoles(guild){
     var roleArray = guild.roles.array()
