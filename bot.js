@@ -31,13 +31,13 @@ function add(message){
     var userN = addInfo[1]
     
     var user = message.guild.members.find(val => val.displayName == userN)
-        
-    if(user != undefined){
+    
+    if(user != undefined && guildRole != 0){
         user.addRole(message.guild.roles.find(val => val === guildRole)).catch(reason => console.log(reason))
         message.channel.send(userN + " has been added to " + guildRole.name)
     }
     else{
-        message.channel.send("User could not be found")
+        message.channel.send("User could not be found. Perhaps you misspelled something.")
     }
 }
 function remove(message){
@@ -46,12 +46,12 @@ function remove(message){
     var guildRoles = getGuildRoles(message.guild)
 
     var guildRole = getGuildRole(message, guildRoles, addInfo)
-
+    
     var userN = addInfo[1]
 
     var user = message.guild.members.find(val => val.displayName == userN)
-        
-    if(user != undefined){
+    
+    if(user != undefined && guildRole != 0){
         user.removeRole(message.guild.roles.find(val => val === guildRole)).catch(reason => console.log(reason))
         message.channel.send(userN + " has been removed from " + guildRole.name)
     }
@@ -65,21 +65,27 @@ function remove(message){
 function getGuildRole(message, guildRoles, addInfo){
 
     var guildRole
-
-    for(var i = 0; i <= guildRoles.length; i++){
+    
+    for(var i = 0; i <= guildRoles.length - 1; i++){
 
         var role = message.member.roles.find(val => val == guildRoles[i])
         var statedRole = message.member.roles.find(val => val.name == addInfo[2])
-
-        if(role != undefined && addInfo[2] == undefined){
+        console.log(role)
+        if(role != null && statedRole == null){
+            
             guildRole = role
         }
-        else if(addInfo[2] != undefined){
+        else if(statedRole != null){
+            
             guildRole = statedRole
         }
         else{
-            message.channel.send("Could not find guild role")
+            
+            guildRole = 0
         }
+    }
+    if(guildRole == 0){
+        message.channel.send("Could not find guild role. You need to have a guild role to use this command")
     }
     return guildRole
 }
