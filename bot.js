@@ -28,11 +28,8 @@ function add(message){
 
     var guildRole = getGuildRole(message, guildRoles, addInfo)
 
-    
-
     var userN = addInfo[1]
     
-    console.log(userN)
     var user = message.guild.members.find(val => val.displayName == userN)
         
     if(user != undefined){
@@ -50,8 +47,6 @@ function remove(message){
 
     var guildRole = getGuildRole(message, guildRoles, addInfo)
 
-    
-
     var userN = addInfo[1]
 
     var user = message.guild.members.find(val => val.displayName == userN)
@@ -68,7 +63,7 @@ function remove(message){
 //get the guild role that the Guild Leader belongs to
 
 function getGuildRole(message, guildRoles, addInfo){
-    
+
     var guildRole
 
     for(var i = 0; i <= guildRoles.length; i++){
