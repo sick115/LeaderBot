@@ -37,7 +37,7 @@ function add(message){
         message.channel.send(userN + " has been added to " + guildRole.name)
     }
     else{
-        message.channel.send("User could not be found. Perhaps you misspelled something.")
+        message.channel.send("User could not be found. You either misspelled something, or you do not have a guild role.")
     }
 }
 function remove(message){
@@ -56,7 +56,7 @@ function remove(message){
         message.channel.send(userN + " has been removed from " + guildRole.name)
     }
     else{
-        message.channel.send("User could not be found")
+        message.channel.send("User could not be found. You either misspelled something, or you do not have a guild role.")
     }
 }
 
@@ -83,9 +83,6 @@ function getGuildRole(message, guildRoles, addInfo){
             
             guildRole = 0
         }
-    }
-    if(guildRole == 0){
-        message.channel.send("Could not find guild role. You need to have a guild role to use this command")
     }
     return guildRole
 }
