@@ -13,7 +13,7 @@ client.on("message", (message) => {
     
     var guildLeaderRole = message.guild.roles.find(val => val.name === "Guild Leader").id
     var verifiedRole = message.guild.roles.find(val => val.name === "Verified").id
-    var modRole = message.guild.roles.find(val => val.name === "Guild Leader").id
+    var modRole = message.guild.roles.find(val => val.name === "Mod").id
 
     if(message.content.startsWith("add") && (message.member.roles.has(guildLeaderRole) || message.member.roles.has(modRole)) && message.member.roles.has(verifiedRole)){
         add(message)
@@ -34,9 +34,12 @@ function add(message){
     
     var user = message.guild.members.find(val => val.displayName == userN)
     
-    if(user != undefined && guildRole != 0){
+    if(user != undefined && guildRole != 0 && user.roles.find(val => val.name == "Verified") != null){
         user.addRole(message.guild.roles.find(val => val === guildRole)).catch(reason => console.log(reason))
         message.channel.send(userN + " has been added to " + guildRole.name)
+    }
+    else if(user.roles.find(val => val.name == "Verified") == null){
+        message.channel.send("User needs to be Verified")
     }
     else{
         message.channel.send("User could not be found. You either misspelled something, or you do not have a guild role.")
