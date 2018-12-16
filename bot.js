@@ -11,10 +11,10 @@ client.on("ready", () => {
 
 client.on("message", (message) => {
 
-    if(message.content.startsWith("add") && ((message.member.roles.find(val => val.name == "Guild Leader") != null) || (message.member.roles.find(val => val.name == "Mod") != null)) && (message.member.roles.find(val => val.name == "Verified") != null)){
+    if(message.content.startsWith("add") && ((message.member.roles.find(val => val.name == "Guild Leader") != null) || (message.member.roles.find(val => val.name == "Mod") != null)) && message.member.roles.find(val => val.name == "Verified") != null){
         add(message)
     }
-    if(message.content.startsWith("remove") && ((message.member.roles.find(val => val.name == "Guild Leader") != null) || (message.member.roles.find(val => val.name == "Mod") != null)) && (message.member.roles.find(val => val.name == "Verified") != null)){
+    if(message.content.startsWith("remove") && ((message.member.roles.find(val => val.name == "Guild Leader") != null) || (message.member.roles.find(val => val.name == "Mod") != null)) && message.member.roles.find(val => val.name == "Verified") != null){
         remove(message)
     }
 })
