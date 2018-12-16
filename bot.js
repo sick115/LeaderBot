@@ -10,15 +10,11 @@ client.on("ready", () => {
 })
 
 client.on("message", (message) => {
-    
-    var guildLeaderRole = message.guild.roles.find(val => val.name === "Guild Leader").id
-    var verifiedRole = message.guild.roles.find(val => val.name === "Verified").id
-    var modRole = message.guild.roles.find(val => val.name === "Mod").id
 
-    if(message.content.startsWith("add") && (message.member.roles.has(guildLeaderRole) || message.member.roles.has(modRole)) && message.member.roles.has(verifiedRole)){
+    if(message.content.startsWith("add") && ((message.member.roles.find(val => val.name == "Guild Leader") != null) || (message.member.roles.find(val => val.name == "Mod") != null)) && (message.member.roles.find(val => val.name == "Verified") != null)){
         add(message)
     }
-    if(message.content.startsWith("remove") && (message.member.roles.has(guildLeaderRole) || message.member.roles.has(modRole)) && message.member.roles.has(verifiedRole)){
+    if(message.content.startsWith("remove") && ((message.member.roles.find(val => val.name == "Guild Leader") != null) || (message.member.roles.find(val => val.name == "Mod") != null)) && (message.member.roles.find(val => val.name == "Verified") != null)){
         remove(message)
     }
 })
