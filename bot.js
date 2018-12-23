@@ -134,9 +134,10 @@ var embedInfo = {
 "Backpack" : "Quiver of a Thousand Arrows Power 28  ,Precision 28  ,Toughness 28  ,Vitality 28  ,CritDamage 28  ,Healing 28  ,ConditionDamage 28"
 }
 
-var embed = new Discord.RichEmbed()
+
 
 function createEmbed(message, fields){
+    var embed = new Discord.RichEmbed()
     embed.title = fields[0]
     for(var i in fields){
         var broken = fields[i].replace(/,/g, "\n")
